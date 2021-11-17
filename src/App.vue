@@ -11,7 +11,13 @@
       <li>Titolo originale: {{ movie.original_title }}</li>
       <li>
         Lingua:
-        <span :class="`flag-icon flag-icon-${movie.original_language}`"></span
+        <span
+          :class="
+            movie.original_language
+              ? `flag-icon flag-icon-${movie.original_language}`
+              : `flag-icon flag-icon-xx`
+          "
+        ></span
         >{{ movie.original_language }}
       </li>
       <li>Voto: {{ movie.vote_average }}</li>
