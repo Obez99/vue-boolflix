@@ -1,5 +1,11 @@
 <template>
   <div id="app">
+    <!-- Search Bar and Button !-->
+    <input type="text" v-model="movieToSearch" /><button @click="searchMovie">
+      Cerca
+    </button>
+
+    <!-- Movie List !-->
     <ul v-for="movie in currentMovies" :key="movie.id">
       <li>Titolo: {{ movie.title }}</li>
       <li>Titolo originale: {{ movie.original_title }}</li>
@@ -17,19 +23,22 @@ export default {
     return {
       apiKey: "031b25f0ecd29749a18d82fd3135886f",
       currentMovies: [],
+      movieToSearch: "",
     };
   },
-  mounted() {
-    axios
-      .get("https://api.themoviedb.org/3/search/movie", {
-        params: {
-          api_key: this.apiKey,
-          query: "Hulk",
-        },
-      })
-      .then((response) => {
-        this.currentMovies = response.data.results;
-      });
+  methods: {
+    searchMovie() {
+      axios
+        .get("https://api.themoviedb.org/3/search/movie", {
+          params: {
+            api_key: this.apiKey,
+            query: this.movieToSearch,
+          },
+        })
+        .then((response) => {
+          this.currentMovies = response.data.results;
+        });
+    },
   },
 };
 </script>
