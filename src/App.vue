@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- Search Bar and Button !-->
-    <input type="text" v-model="movieToSearch" /><button @click="searchItems">
+    <input type="text" v-model="itemToSearch" /><button @click="searchItems">
       Cerca
     </button>
 
@@ -49,40 +49,31 @@ export default {
   name: "App",
   data() {
     return {
+      apiUrl: "https://api.themoviedb.org/3/search/",
       apiKey: "031b25f0ecd29749a18d82fd3135886f",
       currentMovies: [],
       currentSeries: [],
-      movieToSearch: "",
+      itemToSearch: "",
     };
   },
   methods: {
+    apiSearch(itemType, returnType) {
+      debugger;
+      axios
+        .get(this.apiUrl + itemType, {
+          params: {
+            api_key: this.apiKey,
+            query: this.itemToSearch,
+          },
+        })
+        .then((response) => {
+          this[returnType] = response.data.results;
+        });
+    },
+
     searchItems() {
-      this.searchMovie();
-      this.searchSeries();
-    },
-    searchMovie() {
-      axios
-        .get("https://api.themoviedb.org/3/search/movie", {
-          params: {
-            api_key: this.apiKey,
-            query: this.movieToSearch,
-          },
-        })
-        .then((response) => {
-          this.currentMovies = response.data.results;
-        });
-    },
-    searchSeries() {
-      axios
-        .get("https://api.themoviedb.org/3/search/tv", {
-          params: {
-            api_key: this.apiKey,
-            query: this.movieToSearch,
-          },
-        })
-        .then((response) => {
-          this.currentSeries = response.data.results;
-        });
+      this.apiSearch("movie", "currentMovies");
+      this.apiSearch("tv", "currentSeries");
     },
   },
 };
