@@ -9,7 +9,11 @@
     <ul v-for="movie in currentMovies" :key="movie.id">
       <li>Titolo: {{ movie.title }}</li>
       <li>Titolo originale: {{ movie.original_title }}</li>
-      <li>Lingua: {{ movie.original_language }}</li>
+      <li>
+        Lingua:
+        <span :class="`flag-icon flag-icon-${movie.original_language}`"></span
+        >{{ movie.original_language }}
+      </li>
       <li>Voto: {{ movie.vote_average }}</li>
     </ul>
   </div>

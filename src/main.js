@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import "flag-icon-css/sass/flag-icons.scss";
 
 Vue.config.productionTip = false
 
