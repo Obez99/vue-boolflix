@@ -22,6 +22,9 @@
         >{{ movie.original_language }}
       </li>
       <li>Voto: {{ movie.vote_average }}</li>
+      <li>
+        <img :src="imageUrl + movie.poster_path" :alt="movie.original_title" />
+      </li>
     </ul>
     <h2>SERIE</h2>
     <ul v-for="series in currentSeries" :key="series.id">
@@ -39,6 +42,9 @@
         >{{ series.original_language }}
       </li>
       <li>Voto: {{ series.vote_average }}</li>
+      <li>
+        <img :src="imageUrl + series.poster_path" :alt="series.original_name" />
+      </li>
     </ul>
   </div>
 </template>
@@ -54,11 +60,11 @@ export default {
       currentMovies: [],
       currentSeries: [],
       itemToSearch: "",
+      imageUrl: "https://image.tmdb.org/t/p/w342/",
     };
   },
   methods: {
     apiSearch(itemType, returnType) {
-      debugger;
       axios
         .get(this.apiUrl + itemType, {
           params: {
