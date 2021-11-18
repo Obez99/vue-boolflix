@@ -1,7 +1,11 @@
 <template>
   <ul>
-    <li>Titolo: {{ cardData.title }}</li>
-    <li>Titolo originale: {{ cardData.original_title }}</li>
+    <li v-if="cardData.title">Titolo: {{ cardData.title }}</li>
+    <li v-else>Titolo: {{ cardData.name }}</li>
+    <li v-if="cardData.original_title">
+      Titolo originale: {{ cardData.original_title }}
+    </li>
+    <li v-else>Titolo originale: {{ cardData.original_name }}</li>
     <li>
       Lingua:
       <span
@@ -14,8 +18,7 @@
       >{{ cardData.original_language }}
     </li>
     <li>
-      Voto: {{ convertRating() }}
-      <i class="fa fa-star" v-for="n in convertRating()" :key="n"></i>
+      Voto: <i class="fa fa-star" v-for="n in convertRating()" :key="n"></i>
     </li>
 
     <li>
