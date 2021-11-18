@@ -13,7 +13,11 @@
       ></span
       >{{ cardData.original_language }}
     </li>
-    <li v-for="n in convertRating()" :key="n">Voto: {{ convertRating() }}</li>
+    <li>
+      Voto: {{ convertRating() }}
+      <i class="fa fa-star" v-for="n in convertRating()" :key="n"></i>
+    </li>
+
     <li>
       <img
         :src="imageUrl + cardData.poster_path"
