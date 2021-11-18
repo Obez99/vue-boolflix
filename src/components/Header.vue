@@ -1,6 +1,6 @@
 <template>
-  <header>
-    <h1>BOOLFIX</h1>
+  <header class="px-5">
+    <h1>BOOLFLIX</h1>
 
     <SearchBar @search="sendQuery"></SearchBar>
   </header>
