@@ -1,12 +1,8 @@
 <template>
-  <div id="app">
-    <Header @search="searchItems"></Header>
-
-    <!-- Movie List !-->
-    <h2>FILM</h2>
+  <div class="d-flex flex-wrap">
     <Card v-for="movie in currentMovies" :key="movie.id" :rawCardData="movie">
     </Card>
-    <h2>SERIE</h2>
+    <button @click="searchItems()"></button>
     <Card
       v-for="series in currentSeries"
       :key="series.id"
@@ -17,16 +13,17 @@
 
 <script>
 import axios from "axios";
-import Header from "./components/Header.vue";
-import Card from "./components/Card.vue";
+import Card from "./Card.vue";
 export default {
-  name: "App",
-  components: { Header, Card },
+  name: "CardsContainer",
+  components: { Card },
+  props: {
+    itemToSearch: String,
+  },
   data() {
     return {
       apiUrl: "https://api.themoviedb.org/3",
       apiKey: "031b25f0ecd29749a18d82fd3135886f",
-      itemToSearch: "",
       currentMovies: [],
       currentSeries: [],
     };
@@ -54,6 +51,5 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@import "./styles/app.scss";
+<style>
 </style>

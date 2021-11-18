@@ -1,49 +1,58 @@
 <template>
-  <ul>
-    <li v-if="cardData.title">Titolo: {{ cardData.title }}</li>
-    <li v-else>Titolo: {{ cardData.name }}</li>
-    <li v-if="cardData.original_title">
-      Titolo originale: {{ cardData.original_title }}
-    </li>
-    <li v-else>Titolo originale: {{ cardData.original_name }}</li>
-    <li>
-      Lingua:
-      <span
-        :class="
-          cardData.original_language
-            ? `flag-icon flag-icon-${cardData.original_language}`
-            : `flag-icon flag-icon-xx`
-        "
-      ></span
-      >{{ cardData.original_language }}
-    </li>
-    <li>
-      Voto: <i class="fa fa-star" v-for="n in convertRating()" :key="n"></i>
-    </li>
+  <div class="d-inline-block">
+    <ul>
+      <li v-if="rawCardData.title">Titolo: {{ rawCardData.title }}</li>
+      <li v-else>Titolo: {{ rawCardData.name }}</li>
+      <li v-if="rawCardData.original_title">
+        Titolo originale: {{ rawCardData.original_title }}
+      </li>
+      <li v-else>Titolo originale: {{ rawCardData.original_name }}</li>
+      <li>
+        Lingua:
+        <span
+          :class="
+            rawCardData.original_language
+              ? `flag-icon flag-icon-${rawCardData.original_language}`
+              : `flag-icon flag-icon-xx`
+          "
+        ></span
+        >{{ rawCardData.original_language }}
+      </li>
+      <li>
+        Voto: <i class="fa fa-star" v-for="n in cardData.stars" :key="n"></i>
+      </li>
 
-    <li>
-      <img
-        :src="imageUrl + cardData.poster_path"
-        :alt="cardData.original_title"
-      />
-    </li>
-  </ul>
+      <li>
+        <img
+          :src="imageUrl + rawCardData.poster_path"
+          :alt="rawCardData.original_title"
+        />
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
 export default {
   name: "Card",
   props: {
-    cardData: Object,
+    rawCardData: Object,
   },
   data() {
     return {
       imageUrl: "https://image.tmdb.org/t/p/w342/",
     };
   },
+  computed: {
+    cardData() {
+      return {
+        stars: this.convertRating(this.rawCardData["vote_average"]),
+      };
+    },
+  },
   methods: {
-    convertRating() {
-      return Math.round(this.cardData.vote_average / 2);
+    convertRating(voteAverage) {
+      return Math.round(voteAverage / 2);
     },
   },
 };
