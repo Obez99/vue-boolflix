@@ -1,5 +1,9 @@
 <template>
-  <div class="d-inline-block">
+  <div class="movie-card">
+    <img
+      :src="imageUrl + rawCardData.poster_path"
+      :alt="rawCardData.original_title"
+    />
     <ul>
       <li v-if="rawCardData.title">Titolo: {{ rawCardData.title }}</li>
       <li v-else>Titolo: {{ rawCardData.name }}</li>
@@ -20,13 +24,6 @@
       </li>
       <li>
         Voto: <i class="fa fa-star" v-for="n in cardData.stars" :key="n"></i>
-      </li>
-
-      <li>
-        <img
-          :src="imageUrl + rawCardData.poster_path"
-          :alt="rawCardData.original_title"
-        />
       </li>
     </ul>
   </div>
@@ -58,5 +55,6 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+@import "../styles/card.scss";
 </style>

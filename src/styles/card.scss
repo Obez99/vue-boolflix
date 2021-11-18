@@ -1,0 +1,29 @@
+.movie-card{
+  display: inline-block;
+  position: relative;
+  border: 1px solid white;
+
+  img{
+    
+    transition: filter 0.2s;
+  }
+
+  ul{
+    position: absolute;
+    top:50px;
+    color:white;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+
+  &:hover{
+    img{
+      filter: brightness(0);
+    }
+
+    ul{
+      opacity: 1;
+    }
+  }
+}
