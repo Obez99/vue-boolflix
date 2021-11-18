@@ -13,7 +13,7 @@
       ></span
       >{{ cardData.original_language }}
     </li>
-    <li>Voto: {{ cardData.vote_average }}</li>
+    <li v-for="n in convertRating()" :key="n">Voto: {{ convertRating() }}</li>
     <li>
       <img
         :src="imageUrl + cardData.poster_path"
@@ -33,6 +33,11 @@ export default {
     return {
       imageUrl: "https://image.tmdb.org/t/p/w342/",
     };
+  },
+  methods: {
+    convertRating() {
+      return Math.round(this.cardData.vote_average / 2);
+    },
   },
 };
 </script>
