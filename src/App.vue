@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-    <!-- Search Bar and Button !-->
-    <input type="text" v-model="itemToSearch" /><button @click="searchItems">
-      Cerca
-    </button>
+    <Header @search="searchItems"></Header>
 
     <!-- Movie List !-->
     <h2>FILM</h2>
@@ -20,20 +17,27 @@
 
 <script>
 import axios from "axios";
+import Header from "./components/Header.vue";
 import Card from "./components/Card.vue";
 export default {
   name: "App",
-  components: { Card },
+  components: { Header, Card },
   data() {
     return {
       apiUrl: "https://api.themoviedb.org/3",
       apiKey: "031b25f0ecd29749a18d82fd3135886f",
+      itemToSearch: "",
       currentMovies: [],
       currentSeries: [],
-      itemToSearch: "",
     };
   },
   methods: {
+    searchItems(str) {
+      this.itemToSearch = str;
+      this.apiSearch("movie", "currentMovies");
+      this.apiSearch("tv", "currentSeries");
+    },
+
     apiSearch(itemType, returnType) {
       axios
         .get(this.apiUrl + "/search/" + itemType, {
@@ -46,14 +50,12 @@ export default {
           this[returnType] = response.data.results;
         });
     },
-
-    searchItems() {
-      this.apiSearch("movie", "currentMovies");
-      this.apiSearch("tv", "currentSeries");
-    },
   },
 };
 </script>
 
 <style lang="scss">
+body {
+  margin: 0;
+}
 </style>
