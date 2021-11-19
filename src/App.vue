@@ -1,54 +1,26 @@
 <template>
   <div id="app">
-    <Header @search="searchItems"></Header>
+    <Header @search="fetchQuery"></Header>
 
     <!-- Movie List !-->
-    <h2>FILM</h2>
-    <Card v-for="movie in currentMovies" :key="movie.id" :rawCardData="movie">
-    </Card>
-    <h2>SERIE</h2>
-    <Card
-      v-for="series in currentSeries"
-      :key="series.id"
-      :rawCardData="series"
-    ></Card>
+    <CardsContainer :passItem="itemToSearch"></CardsContainer>
   </div>
 </template>
 
 <script>
-import axios from "axios";
 import Header from "./components/Header.vue";
-import Card from "./components/Card.vue";
+import CardsContainer from "./components/CardsContainer.vue";
 export default {
   name: "App",
-  components: { Header, Card },
+  components: { Header, CardsContainer },
   data() {
     return {
-      apiUrl: "https://api.themoviedb.org/3",
-      apiKey: "031b25f0ecd29749a18d82fd3135886f",
       itemToSearch: "",
-      currentMovies: [],
-      currentSeries: [],
     };
   },
   methods: {
-    searchItems(str) {
+    fetchQuery(str) {
       this.itemToSearch = str;
-      this.apiSearch("movie", "currentMovies");
-      this.apiSearch("tv", "currentSeries");
-    },
-
-    apiSearch(itemType, returnType) {
-      axios
-        .get(this.apiUrl + "/search/" + itemType, {
-          params: {
-            api_key: this.apiKey,
-            query: this.itemToSearch,
-          },
-        })
-        .then((response) => {
-          this[returnType] = response.data.results;
-        });
     },
   },
 };
