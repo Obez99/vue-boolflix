@@ -43,7 +43,7 @@
       <li class="mt-3">
         <strong>Overview:</strong>
         <p>{{ rawCardData.overview }}</p>
-        <span v-if="!cardData.overview">Nessuna overview disponibile</span>
+        <span v-if="!rawCardData.overview">Nessuna overview disponibile</span>
       </li>
     </ul>
   </div>
