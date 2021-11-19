@@ -1,7 +1,11 @@
 <template>
   <div class="movie-card">
     <img
-      :src="imageUrl + rawCardData.poster_path"
+      :src="
+        rawCardData.poster_path
+          ? imageUrl + rawCardData.poster_path
+          : require('../assets/not-found.png')
+      "
       :alt="rawCardData.original_title"
     />
     <ul>

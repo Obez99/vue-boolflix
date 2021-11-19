@@ -1,17 +1,26 @@
 <template>
-  <div>
-    <h2>FILM</h2>
-    <Card
-      v-for="card in currentMovies"
-      :key="card.id"
-      :rawCardData="card"
-    ></Card>
-    <h2>SERIE</h2>
-    <Card
-      v-for="card in currentSeries"
-      :key="card.id"
-      :rawCardData="card"
-    ></Card>
+  <div class="my-5">
+    <h2 v-if="currentMovies.length > 0" class="mb-3 text-center text-black">
+      FILM
+    </h2>
+    <div class="d-flex flex-wrap justify-content-center gap-4">
+      <Card
+        v-for="card in currentMovies"
+        :key="card.id"
+        :rawCardData="card"
+      ></Card>
+    </div>
+
+    <h2 v-if="currentSeries.length > 0" class="mb-3 text-center text-black">
+      SERIE
+    </h2>
+    <div class="d-flex flex-wrap justify-content-center gap-4">
+      <Card
+        v-for="card in currentSeries"
+        :key="card.id"
+        :rawCardData="card"
+      ></Card>
+    </div>
   </div>
 </template>
 
