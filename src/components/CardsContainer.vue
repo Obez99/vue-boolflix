@@ -11,7 +11,7 @@
       ></Card>
     </div>
 
-    <h2 v-if="currentSeries.length > 0" class="mb-3 text-center text-black">
+    <h2 v-if="currentSeries.length > 0" class="mt-5 text-center text-black">
       SERIE
     </h2>
     <div class="d-flex flex-wrap justify-content-center gap-4">

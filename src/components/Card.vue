@@ -9,11 +9,11 @@
       :alt="rawCardData.original_title"
     />
     <ul>
-      <li>Titolo: {{ cardTitle }}</li>
-      <li>Titolo originale: {{ cardOriginalTitle }}</li>
+      <li><strong>Titolo:</strong> {{ cardTitle }}</li>
+      <li><strong>Titolo originale:</strong> {{ cardOriginalTitle }}</li>
 
       <li>
-        Lingua:
+        <strong>Lingua: </strong>
         <span
           :class="
             rawCardData.original_language
@@ -22,8 +22,28 @@
           "
         ></span>
       </li>
+
       <li>
-        Voto: <i class="fa fa-star" v-for="n in cardData.stars" :key="n"></i>
+        <strong>Voto: </strong>
+        <i
+          class="fa fa-star text-danger"
+          v-for="n in cardData.stars"
+          :key="n"
+        ></i>
+        <span v-if="cardData.stars">
+          <i
+            class="fa fa-star-o text-danger"
+            v-for="n in 5 - cardData.stars"
+            :key="n"
+          ></i>
+        </span>
+        <span v-if="!cardData.stars">Nessun voto disponibile</span>
+      </li>
+
+      <li class="mt-3">
+        <strong>Overview:</strong>
+        <p>{{ rawCardData.overview }}</p>
+        <span v-if="!cardData.overview">Nessuna overview disponibile</span>
       </li>
     </ul>
   </div>
