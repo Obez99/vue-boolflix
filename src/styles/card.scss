@@ -2,6 +2,7 @@
   display: inline-block;
   position: relative;
   border: 1px solid white;
+  overflow: hidden;
 
   img{
     transition: filter 0.2s;
