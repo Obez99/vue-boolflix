@@ -5,12 +5,9 @@
       :alt="rawCardData.original_title"
     />
     <ul>
-      <li v-if="rawCardData.title">Titolo: {{ rawCardData.title }}</li>
-      <li v-else>Titolo: {{ rawCardData.name }}</li>
-      <li v-if="rawCardData.original_title">
-        Titolo originale: {{ rawCardData.original_title }}
-      </li>
-      <li v-else>Titolo originale: {{ rawCardData.original_name }}</li>
+      <li>Titolo: {{ cardTitle }}</li>
+      <li>Titolo originale: {{ cardOriginalTitle }}</li>
+
       <li>
         Lingua:
         <span
@@ -19,8 +16,7 @@
               ? `flag-icon flag-icon-${rawCardData.original_language}`
               : `flag-icon flag-icon-xx`
           "
-        ></span
-        >{{ rawCardData.original_language }}
+        ></span>
       </li>
       <li>
         Voto: <i class="fa fa-star" v-for="n in cardData.stars" :key="n"></i>
@@ -41,6 +37,15 @@ export default {
     };
   },
   computed: {
+    cardTitle() {
+      if (this.rawCardData.title) return this.rawCardData.title;
+      else return this.rawCardData.name;
+    },
+    cardOriginalTitle() {
+      if (this.rawCardData.original_title)
+        return this.rawCardData.original_title;
+      else return this.rawCardData.original_name;
+    },
     cardData() {
       return {
         stars: this.convertRating(this.rawCardData["vote_average"]),
