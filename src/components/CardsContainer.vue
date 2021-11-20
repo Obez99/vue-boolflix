@@ -64,6 +64,7 @@ export default {
           params: {
             api_key: this.apiKey,
             query: this.passItem,
+            language: "it",
           },
         })
         .then((response) => {
