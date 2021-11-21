@@ -4,7 +4,7 @@
     :style="
       rawCardData.poster_path
         ? `background-image: url(${imageUrl + rawCardData.poster_path});`
-        : require('../assets/not-found.png')
+        : `background-image: url(${require('../assets/not-found.png')});`
     "
   >
     <ul>
