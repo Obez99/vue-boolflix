@@ -1,13 +1,12 @@
 <template>
-  <div class="movie-card">
-    <img
-      :src="
-        rawCardData.poster_path
-          ? imageUrl + rawCardData.poster_path
-          : require('../assets/not-found.png')
-      "
-      :alt="rawCardData.original_title"
-    />
+  <div
+    class="movie-card"
+    :style="
+      rawCardData.poster_path
+        ? `background-image: url(${imageUrl + rawCardData.poster_path});`
+        : require('../assets/not-found.png')
+    "
+  >
     <ul>
       <li><strong>Titolo:</strong> {{ cardTitle }}</li>
       <li><strong>Titolo originale:</strong> {{ cardOriginalTitle }}</li>
