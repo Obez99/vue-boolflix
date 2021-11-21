@@ -6,8 +6,11 @@
     <div class="d-flex flex-wrap justify-content-center gap-4">
       <Card
         v-for="card in currentMovies"
+        :type="'movie'"
         :key="card.id"
         :rawCardData="card"
+        :apiUrl="apiUrl"
+        :apiKey="apiKey"
       ></Card>
     </div>
 
@@ -17,8 +20,11 @@
     <div class="d-flex flex-wrap justify-content-center gap-4">
       <Card
         v-for="card in currentSeries"
+        :type="'tv'"
         :key="card.id"
         :rawCardData="card"
+        :apiUrl="apiUrl"
+        :apiKey="apiKey"
       ></Card>
     </div>
   </div>
