@@ -55,6 +55,9 @@
           <span v-if="i < cast.length - 1">, </span>
           <span v-else>.</span>
         </span>
+        <span v-if="this.cast.length === 0" class="text-danger">
+          Nessun cast disponibile</span
+        >
       </li>
     </ul>
   </div>
