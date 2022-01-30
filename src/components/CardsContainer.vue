@@ -11,6 +11,7 @@
         :rawCardData="card"
         :apiUrl="apiUrl"
         :apiKey="apiKey"
+        :movieGenresList="movieGenresList"
       ></Card>
     </div>
 
@@ -25,6 +26,7 @@
         :rawCardData="card"
         :apiUrl="apiUrl"
         :apiKey="apiKey"
+        :tvGenresList="tvGenresList"
       ></Card>
     </div>
   </div>
@@ -55,6 +57,8 @@ export default {
       currentMovies: [],
       currentSeries: [],
       itemToSearch: "",
+      movieGenresList: [],
+      tvGenresList: [],
     };
   },
 
@@ -77,6 +81,23 @@ export default {
           this[returnType] = response.data.results;
         });
     },
+    getGenres(type, returnType) {
+      axios
+        .get(this.apiUrl + `/genre/${type}/list`, {
+          params: {
+            api_key: this.apiKey,
+            language: "it",
+          },
+        })
+        .then((resp) => {
+          this[returnType] = resp.data.genres;
+        });
+    },
+  },
+
+  mounted() {
+    this.getGenres("tv", "tvGenresList");
+    this.getGenres("movie", "movieGenresList");
   },
 };
 </script>

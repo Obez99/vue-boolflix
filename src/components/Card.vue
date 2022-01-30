@@ -40,7 +40,7 @@
       </li>
 
       <li class="mt-3">
-        <strong>Overview:</strong>
+        <strong>Trama: </strong>
         <p>{{ rawCardData.overview }}</p>
         <span v-if="!rawCardData.overview" class="text-danger"
           >Nessuna overview disponibile</span
@@ -71,11 +71,14 @@ export default {
     apiUrl: String,
     apiKey: String,
     type: String,
+    movieGenresList: Array,
+    tvGenresList: Array,
   },
   data() {
     return {
       imageUrl: "https://image.tmdb.org/t/p/w342/",
       cast: [],
+      genres: [],
     };
   },
   computed: {
@@ -99,7 +102,6 @@ export default {
       return Math.round(voteAverage / 2);
     },
   },
-
   mounted() {
     axios
       .get(this.apiUrl + `/${this.type}/${this.rawCardData.id}/credits`, {
@@ -113,6 +115,9 @@ export default {
           this.cast.push(resp.data.cast[i].name);
         }
       });
+
+    if (this.rawCardData.genre_ids) this.getGenres();
+    else return;
   },
 };
 </script>
