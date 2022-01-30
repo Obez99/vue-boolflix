@@ -1,9 +1,9 @@
-# vue-boolfix
+# VUE Boolflix
 
 ## Description
 This project is a clone of the famous movie streaming platform : **Netflix**.<br>
 <br>
-I made this project using "**The Movie DB" API**, wich contains lots of movies.<br>
+I made this project using **Vue CLI** and "**The Movie DB" API**, wich contains lots of movies.<br>
 
 ## Features
 - In this app you can enter **any film/series you want** and get the first 20 most popular results in cards.<br>
